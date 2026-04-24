@@ -99,5 +99,5 @@ MoyaMoya_Alchemist/
 
 ---
 
-*QQ Series — Senari Gakuin / MonoMonoMonozu*  
+*QQ Series
 *「日常のモヤモヤを、アプリとの対話で結晶化する。」*
