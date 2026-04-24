@@ -505,7 +505,7 @@ document.getElementById('apiKey').addEventListener('input', updateBtn);
 
 // 種の読み込み
 function loadSeed() {
-  const raw = localStorage.getItem('qq_seed');
+  const raw = localStorage.getItem('ed_to_al_seed');
   const el = document.getElementById('seedDisplay');
 
   if (!raw) {
@@ -517,14 +517,14 @@ function loadSeed() {
     const seed = JSON.parse(raw);
     currentSeed = seed;
 
-    const featuresHtml = (seed.features || []).map(f => `<span class="chip">${esc(f)}</span>`).join('');
+    const keywordsHtml = (seed.keywords || []).map(k => `<span class="chip">${esc(k)}</span>`).join('');
 
     el.innerHTML = `
       <div class="seed-row">
-        <div class="seed-item"><span class="key">App Name</span><span class="val">${esc(seed.title||'—')}</span></div>
-        <div class="seed-item"><span class="key">Problem</span><span class="val">${esc(seed.problem||'—')}</span></div>
-        <div class="seed-item"><span class="key">Target</span><span class="val">${esc(seed.target||'—')}</span></div>
-        <div class="seed-item"><span class="key">Features</span><span class="val"><div class="feature-chips">${featuresHtml}</div></span></div>
+        <div class="seed-item"><span class="key">App Name</span><span class="val">${esc(seed.app_name||'—')}</span></div>
+        <div class="seed-item"><span class="key">概要</span><span class="val">${esc(seed.description||'—')}</span></div>
+        <div class="seed-item"><span class="key">最初の一歩</span><span class="val">${esc(seed.first_step||'—')}</span></div>
+        <div class="seed-item"><span class="key">Keywords</span><span class="val"><div class="feature-chips">${keywordsHtml}</div></span></div>
       </div>`;
 
     document.getElementById('panelCard').style.display = 'block';
@@ -570,10 +570,10 @@ async function generate() {
   if (!apiKey || !currentSeed) return;
   setLoading(true);
 
-  const seedText = `アプリ名: ${currentSeed.title}
-解決したいモヤモヤ: ${currentSeed.problem}
-対象ユーザー: ${currentSeed.target}
-欲しい機能: ${(currentSeed.features||[]).join('、')}`;
+  const seedText = `アプリ名: ${currentSeed.app_name}（${currentSeed.app_name_en||''}）
+概要: ${currentSeed.description}
+最初の一歩: ${currentSeed.first_step||'—'}
+キーワード: ${(currentSeed.keywords||[]).join('、')}`;
 
   const specText = buildSpecText();
 
